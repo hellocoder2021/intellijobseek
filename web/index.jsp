@@ -1,8 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 24 Oct, 2022, 10:46:16 PM
-    Author     : Prashant
---%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
