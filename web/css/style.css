@@ -1,0 +1,53 @@
+body{
+	background: url(E:\JOB/lap.jpg);
+	background-size: cover;
+	background-attachment:fixed;
+	margin:0;
+	padding:0;
+	background-color:#fff;
+}  
+.form-div{
+	margin:5%auto;
+	border: 1px solid grey;
+	
+}
+
+.form-div h1{
+	font-size:4em;
+	color:#017bf5;
+ 	margin:2% 0; 
+}
+
+.form-div label{
+	font-size:4em;
+	color:#017bf5;
+	font-weight:500;
+ 	margin:2% 0; 
+}
+
+.form-div input[type="text"]{
+	-webkit-appearnce: none !important;
+	border: none;
+	border-bottom:1px solid #017fb5;
+}
+.form-div input[type="email"]{
+	-webkit-appearnce:none !important;
+	border: none;
+	border-bottom:1px solid #017fb5;
+}
+.form-div input[type="password"]{
+	-webkit-appearnce:none !important;
+	border: none;
+	border-bottom:1px solid #017fb5;
+}
+
+    
+.form-div input[type="submit"]{
+	margin:2% 0;
+	font-size: 1.5em;
+	font-weight:660;
+}
+.form-div p{
+	font-size:0.89em;
+}
+
