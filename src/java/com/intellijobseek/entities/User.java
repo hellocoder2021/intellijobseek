@@ -9,6 +9,6 @@ package com.intellijobseek.entities;
  *
  * @author hp 1
  */
-public class user {
+public class User {
     
 }
