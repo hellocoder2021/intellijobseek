@@ -2,13 +2,13 @@ package com.intellijobseek.utility;
 
 import java.util.Properties;
 import java.util.Random;
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import java.mail.Authenticator;
+import java.mail.Message;
+import java.mail.PasswordAuthentication;
+import java.mail.Session;
+import java.mail.Transport;
+import java.mail.internet.InternetAddress;
+import java.mail.internet.MimeMessage;
 
 public class EmailSender {
 
