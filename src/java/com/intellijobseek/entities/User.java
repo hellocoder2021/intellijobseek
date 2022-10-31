@@ -5,7 +5,7 @@ import java.sql.*;
 public class User {
     private String user_id;
     private String user_email;
-    private String user_password;
+    private String user_passwd;
     private String user_first_name;
     private String user_last_name;
     
@@ -14,15 +14,43 @@ public class User {
     private String background_pic;
     private Timestamp user_joined;
     private String user_about;
+    private String user_website;
+
+    public String getUser_website() {
+        return user_website;
+    }
+
+    public void setUser_website(String user_website) {
+        this.user_website = user_website;
+    }
+
+    
+    public User() {
+    }
     
 
-    public User(String user_id, String user_email, String user_password, String user_first_name, String user_last_name) {
+    public User(String user_id, String user_email, String user_passwd, String user_first_name, String user_last_name) {
         this.user_id = user_id;
         this.user_email = user_email;
-        this.user_password = user_password;
+        this.user_passwd = user_passwd;
         this.user_first_name = user_first_name;
         this.user_last_name = user_last_name;
     }
+
+    public User(String user_id, String user_email, String user_passwd, String user_first_name, String user_last_name, String user_contact, String profile_pic, String background_pic, Timestamp user_joined, String user_about) {
+        this.user_id = user_id;
+        this.user_email = user_email;
+        this.user_passwd = user_passwd;
+        this.user_first_name = user_first_name;
+        this.user_last_name = user_last_name;
+        this.user_contact = user_contact;
+        this.profile_pic = profile_pic;
+        this.background_pic = background_pic;
+        this.user_joined = user_joined;
+        this.user_about = user_about;
+    }
+    
+    
 
     public String getUser_id() {
         return user_id;
@@ -40,12 +68,12 @@ public class User {
         this.user_email = user_email;
     }
 
-    public String getUser_password() {
-        return user_password;
+    public String getUser_passwd() {
+        return user_passwd;
     }
 
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
+    public void setUser_passwd(String user_password) {
+        this.user_passwd = user_password;
     }
 
     public String getUser_first_name() {

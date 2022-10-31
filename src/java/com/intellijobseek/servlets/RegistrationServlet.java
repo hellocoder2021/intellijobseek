@@ -1,14 +1,16 @@
 package com.intellijobseek.servlets;
 
-import com.intellijobseek.dao.Userdao;
-import com.intellijobseek.entities.User;
-import com.intellijobseek.utility.GenerateUUID;
+import com.intellijobseek.dao.*;
+import com.intellijobseek.entities.*;
+import com.intellijobseek.utility.*;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -29,20 +31,80 @@ public class RegistrationServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-                String user_first_name=request.getParameter("user_first_name");
-                String user_last_name=request.getParameter("user_last_name");
-                String user_email=request.getParameter("user_email");
-                String user_passwd=request.getParameter("user_passwd");
-                String userid=GenerateUUID.generateID();
+
+//            create user session
+            HttpSession session = request.getSession();
+
+//          take registration details from user
+            
+            String user_first_name = request.getParameter("user_first_name").trim();
+            String user_last_name = request.getParameter("user_last_name").trim();
+            String user_email = request.getParameter("user_email").trim();
+            String user_passwd = request.getParameter("user_passwd").trim();
+            String user_id = GenerateUUID.generateID();
+            String confirm_password = request.getParameter("confirmpass");
+
+//          adding details to session
+            session.setAttribute("email", user_email);
+            session.setAttribute("fname", user_first_name);
+            session.setAttribute("lname", user_last_name);
+
+//          check for confirm password 
+            if ((!confirm_password.equals(user_passwd))) {
+//                set appropriate message 
+                Message msg = new Message("text-center alert alert-danger", "password is different from confirm password!!!");
+                session.setAttribute("regmsg", msg);
+
+                response.sendRedirect("./registration_page.jsp");
+                return;
+            }
+
+//          check weak password
+            if (!Validator.isValidPassword(user_passwd)) {
+//                set appropriate message 
+
+                Message msg = new Message("text-center alert alert-danger", "Enter strong password(e.g $ema#123@jh)!!!");
+                session.setAttribute("regmsg", msg);
+
+                response.sendRedirect("./registration_page.jsp");
+                return;
+            }
+            
+//          check valid email
+            if (!Validator.isValidEmail(user_email)) {
+//                set appropriate message 
+
+                Message msg = new Message("text-center alert alert-danger", "Enter Valid Email(e.g example@gmail.com)!!!");
+                session.setAttribute("email", "");
+                session.setAttribute("regmsg", msg);
+
+                response.sendRedirect("./registration_page.jsp");
+                return;
+            }
+            
+
+//          encrypt password
+            String encript_passwd = EncryptPassword.cryptWithMD5(user_passwd);
+
+            User user = new User(user_id, user_email, encript_passwd, user_first_name, user_last_name);
+
+            Userdao dao = new Userdao(ConnectionProvider.getConnection());
+            
+//          check for existing user
+            if(dao.isExistingUser(user_email))
+            {
+                Message msg = new Message("text-center alert alert-danger", "This Email already registered!!!");
+                session.setAttribute("regmsg", msg);
+                response.sendRedirect("./registration_page.jsp");
                 
-                User user(user_first_name, user_last_name, user_email, user_passwd, userid);
+            }else if (dao.registerUser(user)) {
+                response.sendRedirect("./login_page.jsp");
                 
-                Userdao userdao;
-                
-                if(userdao.registerUser(user))
-                    System.out.println("registered");
-                else
-                    System.out.println("not registered");
+            } else {
+                Message msg = new Message("text-center alert alert-danger", "Error try again!!!");
+                session.setAttribute("regmsg", msg);
+                response.sendRedirect("./registration_page.jsp");
+            }
         }
     }
 

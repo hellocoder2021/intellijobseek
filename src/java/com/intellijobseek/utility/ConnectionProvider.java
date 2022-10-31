@@ -15,6 +15,7 @@ public class ConnectionProvider {
             if (con == null) {
                 //driver load
                 Class.forName("com.mysql.cj.jdbc.Driver");
+                System.out.println("driver loaded");
                 //connection estb
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/intellijobseek", "root", "root");
             }

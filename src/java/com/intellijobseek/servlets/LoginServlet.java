@@ -1,11 +1,17 @@
 package com.intellijobseek.servlets;
 
+import com.intellijobseek.dao.Userdao;
+import com.intellijobseek.entities.User;
+import com.intellijobseek.utility.ConnectionProvider;
+import com.intellijobseek.utility.EncryptPassword;
+import com.intellijobseek.utility.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,26 +33,31 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String fetched_email=request.getParameter("user_email");
-            String fetched_passwd=request.getParameter("user_passwd");
             
-//            get user from database
-            Userdao user;
-            User curr_user=user.getUser();
+//            create session
+            HttpSession session = request.getSession();
             
-            if(curr_user == NULL)
+            
+            String fetched_email=request.getParameter("user_email").trim();
+            String fetched_passwd=request.getParameter("user_passwd").trim();
+            
+            String encript_password=EncryptPassword.cryptWithMD5(fetched_passwd);
+            
+            Userdao dao = new Userdao(ConnectionProvider.getConnection());
+            
+            User user = dao.fetchUserByCredential(fetched_email, encript_password);
+            if (user != null) 
             {
-                System.err.println("user not present ");
-                
-//                redirect to login page
-                
+                    session.setAttribute("user", user);
+                    response.sendRedirect("./index.jsp");    
             }
             else
             {
-                //redirect user to home page
+                session.setAttribute("user", null);
+                Message msg = new Message("alert-danger text-center", "Invalid email or password!!");
+                session.setAttribute("loginmsg", msg);
+                response.sendRedirect("./login_page.jsp");
             }
-            
-            
         }
     }
 
