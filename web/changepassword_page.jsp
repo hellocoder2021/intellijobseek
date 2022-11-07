@@ -4,8 +4,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="global/header.jsp" />
-        <title>Change Password</title>
+        <title>Intellijobseek | Change Password</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <style>
+            body{background-color: #f5f6fa;}
+        </style>
     </head>
     <body>
        <div class="container">
@@ -16,9 +19,11 @@
 		<div class="row">
 			<div class ="col-md-4 offset-md-4 form-div">
 				<form id="form-changePassword">
-					<h3 class="text-center" style="color:grey"><i class='fa fa-eye-slash fa-4x'></i></h3>
+					<h3 class="text-center" style="color:grey"><i class='fa fa-eye-slash fa-2x'></i></h3>
 					<h6 class="text-center" style="color:#017bf5">Change Password!</h6> 	
-					<div class="form-group">
+                                        <br>
+                                        <br>
+                                        <div class="form-group">
 						<label for="email"> Email</label>
 						<input type="email" name="email"
 						class="form-control form-control-lg" 

@@ -1,5 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.intellijobseek.utility.Message"%>
+
+<%
+   if(session.getAttribute("prev_email")==null || session.getAttribute("prev_otp")==null)
+   {
+        response.sendRedirect("emailverification_page.jsp");
+   }       
+%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -88,40 +97,28 @@
 
             </div>
             <div class="row">
-
-                <%
-                    boolean sessionflag = true;
-                    if (session == null) {
-                        sessionflag = false;
-                    }
-                    session.setAttribute("default" , "");
-                %>
-
                 <div class ="col-md-4 offset-md-4 form-div">
-                    <form id="form-register" action="./RegistrationServlet" method="GET">
+                    <form id="form-register" action="./RegistrationServlet" method="POST">
                         <h1 class="text-center">Create Account</h1> 
                         <div class="form-group">
                             <label for="user_first_name"> First Name</label>
                             <input type="text" name="user_first_name"
                                    class="form-control form-control-lg" 
-                                   placeholder="Enter Your First Name" required="required" 
-                                   value=<%=(sessionflag) ? session.getAttribute("fname") : session.getAttribute("default") %> "/>
+                                   placeholder="Enter Your First Name" required="required"/>
                         </div> 
 
                         <div class="form-group">
                             <label for="user_last_name"> Last Name</label>
                             <input type="text" name="user_last_name"
                                    class="form-control form-control-lg" 
-                                   placeholder="Enter Your Last Name" required="required"
-                                   value="<%=(sessionflag) ? session.getAttribute("lname"): session.getAttribute("default")%>"/>
+                                   placeholder="Enter Your Last Name" required="required" />
                         </div>
 
                         <div class="form-group">
                             <label for="user_email"> Email</label>
                             <input type="email" name="user_email"
                                    class="form-control form-control-lg" 
-                                   placeholder="Enter Your Email Address" required="required"
-                                   value="<%=(sessionflag) ? session.getAttribute("email"): session.getAttribute("default")%>" />
+                                   placeholder="Enter Your Email Address" required="required" value="<%=session.getAttribute("prev_email")%>" />
                         </div>
 
                         <div class="form-group">

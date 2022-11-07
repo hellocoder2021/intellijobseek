@@ -11,12 +11,13 @@ import com.intellijobseek.utility.*;
  *
  * @author hp victus
  */
-public class Connection {
+public class Connect {
     private String con_id;
     private String recv_id;
     private String send_id;
+    private boolean is_accepted;
 
-    public Connection(String con_id, String recv_id, String send_id, boolean is_accepted) {
+    public Connect(String con_id, String recv_id, String send_id, boolean is_accepted) {
         this.con_id = con_id;
         this.recv_id = recv_id;
         this.send_id = send_id;
@@ -54,5 +55,4 @@ public class Connection {
     public void setIs_accepted(boolean is_accepted) {
         this.is_accepted = is_accepted;
     }
-    private boolean is_accepted;
 }

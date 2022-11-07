@@ -90,8 +90,11 @@ public class Userdao {
             ps.setString(1, email);
             ResultSet set = ps.executeQuery();
             if (set.next()) {
-                System.out.println("existing user");
-                return true;
+                if(set.getInt(1) >= 1)
+                {
+                    System.out.println("existing user");
+                    return true;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
