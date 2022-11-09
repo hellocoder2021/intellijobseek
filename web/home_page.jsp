@@ -22,11 +22,9 @@
         }
     }
 
-    if (user != null) {
+    if (user == null) {
 //      remove old sessions of user
-        session.removeAttribute("user");
-        session.setAttribute("user", user);
-        response.sendRedirect("./home_page.jsp");
+        response.sendRedirect("./login_page.jsp");
     }
 
 %>
@@ -129,6 +127,10 @@
                 transition:1s;
                 top:0;
             }
+            .img:hover{
+                cursor: pointer;
+            }
+            
         </style>
         <title>Home Page</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -186,13 +188,33 @@
                                 <p>To secure a challenging and rewarding position as Android Developer with an established organization that can utilize my skills and experience.</p>
                             </div><br>
                             <div class="btn">
-                                <center><a href="#">View Profile</a></center>
+                                <center><a href="./profile_page.jsp">View Profile</a></center>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!--user posts-->
-                <div class="col-7" id ="posts"> 
+                <div class="col-5" id ="posts">
+                    <br>
+                    <br>
+                    <br>
+                    
+                    <h6 class="row">
+                        <div class="col-3">
+                            <button type="button" class="btn-circle btn-sm" style="height: 60px; border-radius: 50%; width: 60px;">
+                                <img src="./img/photo.jpg" style="witdth:100%; height: 80%;" />
+                            </button>
+                        </div>
+                        <div class="col-9"><input class="form-control" type="text" placeholder="start sharing your thoughts" style="height:60px; font-size: 1.1em;"></div>
+                    </h6>
+                    <h6 class="row">
+                        <div class="col-3"><button type="button" class="btn btn-primary" style="width: 100px; padding: 0px; margin:0px;"><img src="./img/8664927_image_photo_icon.png" style="witdth:100%; height: 80%;" /></button></div>
+                        <div class="col-3"><button type="button" class="btn btn-primary" style="width: 100px; padding: 0px; margin:0px;"><img src="./img/8664927_image_photo_icon.png" style="witdth:100%; height: 80%;" /></button></div>
+                        <div class="col-3"><button type="button" class="btn btn-primary" style="width: 100px; padding: 0px; margin:0px;"><img src="./img/8664927_image_photo_icon.png" style="witdth:100%; height: 80%;" /></button></div>
+                        <div class="col-3"><button type="button" class="btn btn-primary" style="width: 100px; padding: 0px; margin:0px;"><img src="./img/8664843_pen_to_square_icon.png" style="witdth:100%; height: 80%;" /></button></div>
+                        
+                    </h6>
+                    <hr>
                     <div class="card mb-3">
                         <img class="card-img-top" src="./img/default.jpg" alt="Card image cap" style="height: 100px;">
                         <div class="card-body">
@@ -202,9 +224,7 @@
                         </div>
                     </div>
                 <!--user post ended-->
-
-
-                <div class="col-2" id ="footer">
+                <div class="col-4" id ="footer">
                     <h2> FOOTER</h2>
                 </div>
             </div>

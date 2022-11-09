@@ -4,7 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <jsp:include page="global/header.jsp" />
-        <title>intelliJobSeek | Profile_Page</title>
+        <title>intelliJobSeek | Profile Page</title>
         <style>
             body{
                 padding: 2rem 0rem;
