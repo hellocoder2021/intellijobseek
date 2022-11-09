@@ -1,32 +1,5 @@
-<%@page import="com.intellijobseek.utility.ConnectionProvider"%>
-<%@page import="com.intellijobseek.dao.Userdao"%>
-<%@page import="com.intellijobseek.entities.User"%>
-<%@page import="com.intellijobseek.utility.Message"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!--check for user already login-->
-<%
-    User user=null;
-    Cookie[] cookies = request.getCookies();
-    if (cookies == null) {
-//        no cookie check session
-        user=(User)session.getAttribute("user");
-    } 
-    else
-    {
-//      fetch user
-        Userdao dao = new Userdao(ConnectionProvider.getConnection());
-        for(Cookie c : cookies)
-        {
-            String tuserID = c.getName();
-            if (tuserID.equals("user_id"))
-            {
-                String userID=c.getValue();
-                user= dao.getUserByUserID(userID);
-            }
-        }
-    }
-%>
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -124,7 +97,6 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         </head>
         <body>
-            
             <div class = "container-fluid">
             <div class= "row">
                 <div class = "col-12">
