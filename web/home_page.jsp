@@ -49,8 +49,77 @@
             }
 
             body {
-                background: #EBF4FA; }    
-            </style>
+                background: #EBF4FA; } 
+            .profile_conteiner{
+	height:600px;
+	width:300px;
+	box-shadow: 0px 6px 10px -6px;
+	border-radius:10px;
+	margin:auto;
+	margin-top:60px;
+	margin-bottom:60px;
+	overflow:hidden;
+        }
+        .image_conteiner{
+	height:150px;
+	background:orange;
+        }
+        .image{
+	background:blue;
+	height:120px;
+	width:120px;
+	padding:5px;
+	border-radius:50%;
+	transform:translate(100px,90px); 
+        }
+        .image img{
+	height:110px;
+	width:110px;
+	border-radius:50%;
+	
+        }
+        .text_conteiner{
+	height:350px;
+	background: white;
+	padding:20px;
+	padding-top:70px;
+        }
+        .text_conteiner h3,h4,p{
+	text-align:center;
+        }
+        .title h4{
+	color:lightcoral;
+        }
+        .btn{
+	background:purple;
+	border-radius:20px;
+	height:40px;
+	width:140px;
+	margin-left:60px;
+	margin-right:auto;
+	text-align:center;
+	
+        }
+        .btn:hover{
+	background:none;
+	color:purple;
+	border:2px solid purple;
+	border-style:double;
+	transition:1s;
+        }
+        .btn a{
+	text-decoration:none;
+	color:blue;
+	line-height:40px;
+	color:white;
+	display:block;
+        }
+        .btn a:hover{
+	color:purple;
+	transition:1s;
+	top:0;
+        }
+        </style>
             <title>Home Page</title>
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         </head>
@@ -91,7 +160,25 @@
             </div>
             <div class="row">
                 <div class="col-3" id ="profile"> 
-                    <h2> PROFILE</h2>
+                    <div class="profile_conteiner">
+		<div class="image_conteiner">
+			<div class="image">
+				<img src="#" class="rounded-circle">
+			</div>
+		</div>
+		<div class="text_conteiner">
+			<div class="title">
+				<h3>Prabhjeet Singh</h3><br>
+				<h4>Android Developer</h4><br>
+			</div>
+			<div class="objective">
+			<p>To secure a challenging and rewarding position as Android Developer with an established organization that can utilize my skills and experience.</p>
+			</div><br>
+			<div class="btn">
+				<center><a href="#">View Profile</a></center>
+			</div>
+		</div>
+	</div>
                 </div>
 
                 <div class="col-7" id ="posts"> 
