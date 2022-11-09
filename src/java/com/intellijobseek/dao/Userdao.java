@@ -12,11 +12,6 @@ public class Userdao {
     }
 
     public boolean registerUser(User user) {
-//        int count = searchUserByEmail(user.getUseremail());
-//        if (count != 0) {
-//            success = false;
-//            return success;
-//        }
         try {
             //user ----------> database
             String query = "insert into user(user_id, user_email, user_passwd, user_first_name, user_last_name) values(?,?,?,?,?)";
@@ -100,6 +95,36 @@ public class Userdao {
             e.printStackTrace();
         }
         return false;
+    }
+    
+//    get user by id from database : create cookies session
+    
+    public User getUserByUserID(String userID) {
+        User user = null;
+        try {
+            //database ------> User
+            String query = "select * from user where user_id=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, userID);
+            ResultSet set = ps.executeQuery();
+            if (set.next()) {
+                user=new User();
+                user.setUser_id(set.getString("user_id"));
+                user.setUser_first_name(set.getString("user_first_name"));
+                user.setUser_email(set.getString("user_email"));
+                user.setBackground_pic(set.getString("background_pic"));
+                user.setProfile_pic(set.getString("profile_pic"));
+                user.setUser_about(set.getString("user_about"));
+                user.setUser_contact(set.getString("user_contact"));
+                user.setUser_last_name(set.getString("user_last_name"));
+                user.setUser_website(set.getString("user_website"));
+            }
+        } catch (Exception e) {
+            System.out.println("user not found 193 line error");
+            e.printStackTrace();
+        }
+        return user;
+
     }
     
     

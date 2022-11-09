@@ -30,7 +30,7 @@ public class EmailVerificationServlet extends HttpServlet {
                 String orgpass = "kokqqdwjcylzlmjj";
                 String welcome_msg = "Hello!!!";
                 
-//                check for existing user
+//              check for existing user
                 boolean flag=false;
                 Userdao dao = new Userdao(ConnectionProvider.getConnection());
                 if (!dao.isExistingUser(email) && (flag=true) && EmailSender.sendEmail(email, orgmail, orgpass, welcome_msg, gen_otp)) {

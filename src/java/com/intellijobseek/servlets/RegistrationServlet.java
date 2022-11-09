@@ -32,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
             String user_id = GenerateUUID.generateID();
             String confirm_password = request.getParameter("confirmpass");
             
-//            if user has changed the verified email
+//          if user has changed the verified email
             if(!prev_email.equals(user_email))
             {
                 Message msg = new Message("text-center alert alert-danger", "you cannot change email try again!!!");

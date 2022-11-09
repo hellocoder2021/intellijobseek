@@ -8,27 +8,14 @@ import com.intellijobseek.utility.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author prashant
- *
- */
 public class LoginServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -49,7 +36,9 @@ public class LoginServlet extends HttpServlet {
             if (user != null) 
             {
                     session.setAttribute("user", user);
-                    response.sendRedirect("./index.jsp");    
+                    Cookie userid_ck=new Cookie("user_id", user.getUser_id());
+                    response.addCookie(userid_ck);
+                    response.sendRedirect("./home_page.jsp");    
             }
             else
             {

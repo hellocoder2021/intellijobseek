@@ -1,5 +1,44 @@
+<%@page import="com.intellijobseek.utility.ConnectionProvider"%>
+<%@page import="com.intellijobseek.dao.Userdao"%>
+<%@page import="com.intellijobseek.entities.User"%>
 <%@page import="com.intellijobseek.utility.Message"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<!--check for user already login-->
+<%
+    User user=null;
+    Cookie[] cookies = request.getCookies();
+    if (cookies == null) {
+//      no cookie check session
+        user=(User)session.getAttribute("user");
+        response.sendRedirect("./index.jsp");
+    } 
+    else
+    {
+//      fetch user
+        Userdao dao = new Userdao(ConnectionProvider.getConnection());
+        for(Cookie c : cookies)
+        {
+            String tuserID = c.getName();
+            if (tuserID.equals("user_id"))
+            {
+                String userID=c.getValue();
+                user= dao.getUserByUserID(userID);
+            }
+        }
+    }
+    
+    if(user!=null)
+    {
+//      remove old sessions of user
+        session.removeAttribute("user");
+        session.setAttribute("user", user);
+        response.sendRedirect("./home_page.jsp");
+    }
+
+%>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -66,8 +105,7 @@
     <body>
 
         <!--message header-->
-        <%
-            Message msg = (Message) session.getAttribute("loginmsg");
+        <%            Message msg = (Message) session.getAttribute("loginmsg");
             if (msg != null) {
         %>
         <h5 class="alert <%=msg.getMsgClass()%>" role="alert">

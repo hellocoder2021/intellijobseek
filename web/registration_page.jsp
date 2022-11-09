@@ -1,11 +1,40 @@
+<%@page import="com.intellijobseek.utility.ConnectionProvider"%>
+<%@page import="com.intellijobseek.dao.Userdao"%>
+<%@page import="com.intellijobseek.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.intellijobseek.utility.Message"%>
 
 <%
-   if(session.getAttribute("prev_email")==null || session.getAttribute("prev_otp")==null)
-   {
-        response.sendRedirect("emailverification_page.jsp");
-   }       
+    if (session.getAttribute("prev_email") == null || session.getAttribute("prev_otp") == null) {
+        response.sendRedirect("./emailverification_page.jsp");
+    }
+    else
+    {
+        User user=null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+    //      no cookie check session
+            user=(User)session.getAttribute("user");
+        } 
+        else
+        {
+    //      fetch user
+            Userdao dao = new Userdao(ConnectionProvider.getConnection());
+            for(Cookie c : cookies)
+            {
+                String tuserID = c.getName();
+                if (tuserID.equals("user_id"))
+                {
+                    String userID=c.getValue();
+                    user= dao.getUserByUserID(userID);
+                }
+            }
+        }
+        if(user != null)
+        {
+            response.sendRedirect("./home_page.jsp");
+        }
+    }
 %>
 
 
@@ -13,6 +42,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Intellijobseek | Registration Page</title>
         <jsp:include page="global/header.jsp" />
         <style>
 
@@ -76,8 +106,7 @@
     <body>
 
         <!--message header-->
-        <%
-            Message msg = (Message) session.getAttribute("regmsg");
+        <%            Message msg = (Message) session.getAttribute("regmsg");
             if (msg != null) {
         %>
         <h5 class="alert <%=msg.getMsgClass()%>" role="alert">
