@@ -6,32 +6,26 @@
 
 <!--check for user already login-->
 <%
-    User user=null;
+    User user = null;
     Cookie[] cookies = request.getCookies();
     if (cookies == null) {
 //      no cookie check session
-        user=(User)session.getAttribute("user");
-        response.sendRedirect("./index.jsp");
+        user = (User) session.getAttribute("user");
     } 
     else
     {
 //      fetch user
         Userdao dao = new Userdao(ConnectionProvider.getConnection());
-        for(Cookie c : cookies)
-        {
+        for (Cookie c : cookies) {
             String tuserID = c.getName();
-            if (tuserID.equals("user_id"))
-            {
-                String userID=c.getValue();
-                user= dao.getUserByUserID(userID);
+            if (tuserID.equals("user_id")) {
+                String userID = c.getValue();
+                user = dao.getUserByUserID(userID);
             }
         }
     }
-    
-    if(user!=null)
-    {
-//      remove old sessions of user
-        session.removeAttribute("user");
+
+    if (user != null) {
         session.setAttribute("user", user);
         response.sendRedirect("./home_page.jsp");
     }
@@ -103,20 +97,6 @@
         <title>Home Page</title>
     </head>
     <body>
-
-        <!--message header-->
-        <%            Message msg = (Message) session.getAttribute("loginmsg");
-            if (msg != null) {
-        %>
-        <h5 class="alert <%=msg.getMsgClass()%>" role="alert">
-            <%=msg.getContent()%>
-        </h5>
-        <%
-                session.removeAttribute("loginmsg");
-            }
-        %>
-        <!--end of msg header-->
-
         <div class="container-fluid">
             <div class="row"> <p> </p> </div>
             <div class="row">  
@@ -138,6 +118,18 @@
                                    class="form-control form-control-lg" 
                                    placeholder="Enter The Password" required="required"/>
                         </div>
+                        <!--message header-->
+                        <%            Message msg = (Message) session.getAttribute("loginmsg");
+                            if (msg != null) {
+                        %>
+                        <h5 class="alert <%=msg.getMsgClass()%>" role="alert">
+                            <%=msg.getContent()%>
+                        </h5>
+                        <%
+                                session.removeAttribute("loginmsg");
+                            }
+                        %>
+                        <!--end of msg header-->
                         <div class="form-group">
                             <input type="submit" name ="Sign In" form ="form-signIn" value="Sign In" class="btn btn-success btn-block" />
                         </div>

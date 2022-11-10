@@ -8,11 +8,14 @@
 <%
     User user=null;
     Cookie[] cookies = request.getCookies();
-    if (cookies == null) {
+    if (cookies == null)
+    {
 //        no cookie check session
         user=(User)session.getAttribute("user");
-    } else {
-//        fetch user
+    }
+    else
+    {
+//      fetch user
         Userdao dao = new Userdao(ConnectionProvider.getConnection());
         for(Cookie c : cookies)
         {
@@ -23,12 +26,11 @@
                 user= dao.getUserByUserID(userID);
             }
         }
-    }
+     }
     
     if(user!=null)
     {
 //      remove old sessions of user
-        session.removeAttribute("user");
         session.setAttribute("user", user);
         response.sendRedirect("./home_page.jsp");
     }

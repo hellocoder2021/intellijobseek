@@ -260,10 +260,7 @@
                         <li class="nav-item">
                           <a class="nav-link" href="#"><i class="fa fa-building" style="font-size:24px"></i>work</a>
                         </li>
-                  
-                        <li class="nav-item">
-                          <a class="nav-link" href="#"><i class="fa fa-sign-out" style="font-size:24px"></i>Sign_Out</a>
-                        </li>
+  
                   
                        </ul>
                       <form class="form-inline my-2 my-lg-0">

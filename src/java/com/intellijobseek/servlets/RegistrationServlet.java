@@ -3,6 +3,7 @@ package com.intellijobseek.servlets;
 import com.intellijobseek.dao.*;
 import com.intellijobseek.entities.*;
 import com.intellijobseek.utility.*;
+import java.io.File;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,6 +37,7 @@ public class RegistrationServlet extends HttpServlet {
             if(!prev_email.equals(user_email))
             {
                 Message msg = new Message("text-center alert alert-danger", "you cannot change email try again!!!");
+                session.setAttribute("verified_user", "no");
                 response.sendRedirect("./registration_page.jsp");
             }
             
@@ -44,6 +46,7 @@ public class RegistrationServlet extends HttpServlet {
 //              set appropriate message 
                 Message msg = new Message("text-center alert alert-danger", "password is different from confirm password!!!");
                 session.setAttribute("regmsg", msg);
+                session.setAttribute("verified_user", "no");
                 response.sendRedirect("./registration_page.jsp");
                 return;
             }
@@ -54,7 +57,7 @@ public class RegistrationServlet extends HttpServlet {
 
                 Message msg = new Message("text-center alert alert-danger", "Enter strong password(e.g $ema#123@jh)!!!");
                 session.setAttribute("regmsg", msg);
-
+                session.setAttribute("verified_user", "no");
                 response.sendRedirect("./registration_page.jsp");
                 return;
             }
@@ -67,9 +70,14 @@ public class RegistrationServlet extends HttpServlet {
             Userdao dao = new Userdao(ConnectionProvider.getConnection());
             
             if (dao.registerUser(user)) {
+                session.setAttribute("verified_user", "yes");
+                String path="D:\\intellijobseek_user\\";
+                System.out.println(path);
+                FolderService.createFolder(path, user_id);
                 response.sendRedirect("./login_page.jsp");
                 
             } else {
+                session.setAttribute("verified_user", "no");
                 Message msg = new Message("text-center alert alert-danger", "Error try again!!!");
                 session.setAttribute("regmsg", msg);
                 response.sendRedirect("./registration_page.jsp");

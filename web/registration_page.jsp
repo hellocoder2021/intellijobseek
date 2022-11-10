@@ -5,35 +5,14 @@
 <%@page import="com.intellijobseek.utility.Message"%>
 
 <%
-    if (session.getAttribute("prev_email") == null || session.getAttribute("prev_otp") == null) {
-        response.sendRedirect("./emailverification_page.jsp");
+    if (session.getAttribute("verified_user") !=null) {
+        session.removeAttribute("verified_user");
     }
     else
     {
-        User user=null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies == null) {
-    //      no cookie check session
-            user=(User)session.getAttribute("user");
-        } 
-        else
-        {
-    //      fetch user
-            Userdao dao = new Userdao(ConnectionProvider.getConnection());
-            for(Cookie c : cookies)
-            {
-                String tuserID = c.getName();
-                if (tuserID.equals("user_id"))
-                {
-                    String userID=c.getValue();
-                    user= dao.getUserByUserID(userID);
-                }
-            }
-        }
-        if(user != null)
-        {
-            response.sendRedirect("./home_page.jsp");
-        }
+        RequestDispatcher rs=request.getRequestDispatcher("./emailverification_page.jsp");
+        rs.forward(request, response);
+        return;
     }
 %>
 

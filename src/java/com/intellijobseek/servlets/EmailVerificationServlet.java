@@ -48,13 +48,20 @@ public class EmailVerificationServlet extends HttpServlet {
                         out.println("<div class=\"alert alert-danger\" role=\"alert\">" + "sorry we are unable to send email !!! please try again</div>");
                     
                 }
-            } else {
+            } 
+            else
+            {
                 String aftemail = request.getParameter("email");
                 String aftotp = request.getParameter("otp");
 
-                if (aftemail.equals(session.getAttribute("prev_email")) && aftotp.equals(session.getAttribute("prev_otp"))) {
+                if (aftemail.equals(session.getAttribute("prev_email")) && aftotp.equals(session.getAttribute("prev_otp")))
+                {
+                    session.removeAttribute("prev_otp");
+                    session.setAttribute("verified_user", "yes");
                     response.sendRedirect("./registration_page.jsp");
-                } else {
+                } 
+                else
+                {
                     Message msg = new Message("text-center alert alert-danger", "entered a wrong otp please try again!!!");
                     session.setAttribute("verifymsg", msg);
                     response.sendRedirect("./emailverification_page.jsp");
