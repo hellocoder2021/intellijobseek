@@ -279,7 +279,6 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -292,23 +291,26 @@
 
                                     <div class="col-md-12 col-md-offset-2">
 
-                                        <h1>Create post</h1>
-
+                                        <h5 class="text-center text-primary">Create post</h5>
+                                        <div id="error_alert">
+                                        <!--error msg-->
+                                            
+                                        </div>
                                         <form action="" method="POST" id="create_post_from">
 
                                             <div class="form-group has-error">
                                                 <label for="slug">Topic<span class="require">*</span></label>
-                                                <input type="text" class="form-control" name="post_topic"/>
+                                                <input type="text" class="form-control" name="post_topic" id="post_topic"/>
                                             </div>
                                             <div class="form-group">
                                                 <label for="description">Description</label>
-                                                <textarea rows="5" class="form-control" name="post_text"required></textarea>
+                                                <textarea rows="5" class="form-control" name="post_text" id="post_text" required></textarea>
                                             </div>
 
                                             <div class="input-group">
                                                 <div class="custom-file">
-                                                    <input type="file" name="post_img" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                                                    <label class="custom-file-label" for="inputGroupFile04">upload image</label>
+                                                    <input type="file" name="post_img" class="custom-file-input" id="post_img" aria-describedby="inputGroupFileAddon04">
+                                                    <label class="custom-file-label" for="post_img">upload image</label>
                                                 </div>
                                             </div>
                                             <%if (user != null) {%>

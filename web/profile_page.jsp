@@ -32,19 +32,15 @@
 }
 
 .card-body {
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     height: auto;
 }
 .aboutMe {
     height: auto;
 }
-#nav {
-    border: 2px solid red;
-    margin-top: -1rem;
 
-}
 #profilesec{
-    border: 2px solid red;
+    /*border: 2px solid red;*/
     height: auto;
     padding-top: 1rem;
     position: relative;

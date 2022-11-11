@@ -55,13 +55,15 @@ public class SavePostServlet extends HttpServlet {
 
                 Postdao dao = new Postdao(ConnectionProvider.getConnection());
                 Post post = new Post(post_id, post_text, post_topic, post_img, user_id);
+                
                 if ((!user_id.equals(""))&&dao.savePost(post)) {
-//                post saved
-                    out.println("saved post");
+//                  post saved
+                    out.println("sp");
                 } else {
-                    out.println("error post");
+                    out.println("ep");
                 }
             } catch (Exception e) {
+                out.println("ep");
                 e.printStackTrace();
             }
 

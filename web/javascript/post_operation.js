@@ -18,10 +18,10 @@ $(document).ready(function () {
             success: function (data, textStatus, jqXHR)
             {
                 console.log(data);
-                $('#dvOTP').html(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(data);
+
             },
             processData: false,
             contentType: false
